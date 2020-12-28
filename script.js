@@ -83,11 +83,64 @@ startTimer.addEventListener("click", function () {
 
       if (timeLeft <= 0) {
         clearInterval(showTimer);
-        showScores();
+        showSummary();
         countdownTimer.textContent = "Time is up!";
       }
     }, 1000);
   }
   renderQuestions(currentQIndex);
 });
+
+// render questions and answers
+function renderQuestions(currentQIndex) {
+  // initialize variables
+  main.innerHTML = "";
+  ulCreate.innerHTML = "";
+
+  // render each question
+  for (var i=0; i < arrQuestions.length; i++) {
+    var renQuestion = arrQuestions[currentQIndex].showQuestion;
+    var renChoices = arrQuestions[currentQIndex].choices;
+    main.textContent = renQuestion;
+  }
+  
+  // render choices for each question
+  renChoices.forEach(function (newItem) {
+    var listItem = document.createElement("li");
+    listItem.textContent = newItem;
+    main.appendChild(ulCreate);
+    ulCreate.appendChild(listItem);
+    listItem.addEventListener("click", (answerRW));
+  })
+};
+
+// compare choice chosen to correct answer
+function answerRW(event) {
+  var answer = event.target;
+  if (answer.matches("li")) {
+    var createDiv = document.createElement("div");
+    createDiv.setAttribute("id", "createDiv");
+    // answer is correct
+    if (answer.textContent === arrQuestions[currentQIndex].rightChoice) {
+      score = score + 1;
+      createDiv.textContent = "Right! The answer is: " + arrQuestions[currentQIndex].rightChoice;
+    } else {
+      // answer is incorrect: deduct 10 seconds
+      timeLeft = timeLeft - penalty;
+      createDiv.textContent =
+        "Wrong! The correct answer is : " + arrQuestions[currentQIndex].rightChoice;
+    }
+  }
+  // move to next question
+  currentQIndex = currentQIndex + 1;
+
+  if (currentQIndex >= arrQuestions.length) {
+    // quiz is finished, show user's initials and score
+    showSummary();
+    createDiv.textContent = "Finished! You got " score + "questions out of 5 correct!"
+  } else {
+    renderQuestions(currentQIndex);
+  }
+  main.appendChild(createDiv);
+};
 
