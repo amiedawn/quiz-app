@@ -74,3 +74,20 @@ var arrQuestions = [
   },
 ];
 
+// start
+startTimer.addEventListener("click", function () {
+  if (showTimer === 0) {
+    showTimer = setInterval(function () {
+      timeLeft = timeLeft - 1;
+      countdownTimer.textContent = "Time: " + timeLeft;
+
+      if (timeLeft <= 0) {
+        clearInterval(showTimer);
+        showScores();
+        countdownTimer.textContent = "Time is up!";
+      }
+    }, 1000);
+  }
+  renderQuestions(currentQIndex);
+});
+
