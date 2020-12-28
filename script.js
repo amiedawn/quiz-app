@@ -7,7 +7,7 @@ var main = document.querySelector("#main");
 var wrapper = document.querySelector("#wrapper");
 
 // seconds left is 15 seconds/question
-var timeLeft = 76;
+var timeLeft = 60;
 // hold interval
 var showTimer = 0;
 // 10 second penalty per wrong question
@@ -137,10 +137,80 @@ function answerRW(event) {
   if (currentQIndex >= arrQuestions.length) {
     // quiz is finished, show user's initials and score
     showSummary();
-    createDiv.textContent = "Finished! You got " score + "questions out of 5 correct!"
+    createDiv.textContent = "Finished! You got " + score + " questions out of 5 correct.";
   } else {
     renderQuestions(currentQIndex);
   }
   main.appendChild(createDiv);
 };
 
+// render summary (user's initials and score)
+function showSummary() {
+  main.innerHTML = "";
+  countdownTimer.innerHTML = "";
+
+  // display heading
+  var createHeading = document.createElement("h1");
+  createHeading.setAttribute("id", "createHeading");
+  createHeading.textContent = "All Done!"
+  main.appendChild(createHeading);
+
+  // display score
+  if (timeLeft >=0) {
+    var finalTime = timeLeft;
+    var createShowScore = document.createElement("p");
+    clearInterval(showTimer);
+    createShowScore.textContent = "Your Final Score is: " + finalTime;
+    main.appendChild(createShowScore);
+  }
+
+  // request initials
+  // display label
+  var createInitialsLabel = document.createElement("p");
+  createInitialsLabel.setAttribute("id", "createInitialsLabel");
+  createInitialsLabel.textContent = "Enter Initials: ";
+  main.appendChild(createInitialsLabel);
+
+  // display input box
+  var createInput = document.createElement("input");
+  createInput.setAttribute("type", "text");
+  createInput.setAttribute("id", "initials");
+  createInput.textContent = "";
+  main.appendChild(createInput);
+
+  // display submit button
+  var createSubmit = document.createElement("button");
+  createSubmit.setAttribute("type", "submit");
+  createSubmit.setAttribute("id", "Submit");
+  createSubmit.textContent = "Submit";
+  main.appendChild(createSubmit);
+
+  // submit button event listener to store initials to local storage
+  createSubmit.addEventListener("click", function() {
+    var initials = createInput.value;
+    // validate if initials is left blank
+    if (!initials) {
+      createInitialsLabel.textContent = "Invalid entry! Please enter your initials.";
+    } else {
+      var finalScore = {
+        initials: initials,
+        score: finalTime
+      }
+
+      // store score in local storage
+      var scoresList = localStorage.getItem("scoresList");
+      if (!scoresList) {
+        scoresList = [];
+      } else {
+        scoresList = JSON.parse(scoresList);
+      }
+      scoresList.push(finalScore);
+
+      var currentScore = JSON.stringify(scoresList);
+      localStorage.setItem("scoresList", currentScore);
+
+      // display scores on scores page
+      window.location.replace("./scores.html");
+    }
+  });
+};
