@@ -10,13 +10,21 @@
 </head>
 
 <body>
-  <!--link to score page-->
-  <a href='scores.html'>View High Scores</a>
-  <!--wrapper-->
-  <div id='wrapper'>
+  <header class = "top-line">
+    <!--link to score page-->
+    <div>
+      <a href='scores.html'>View High Scores</a>
+    </div>
     <!--div for timer-->
-    <div id=countdownTimer></div>
-    <!--div for main section-->
+    <div>
+      <!--<div id=countdownTimer></div>-->
+      <p id="showTimer"><span id="countdownTimer"></span></p>
+    </div>
+  </header>
+  
+  <!--div for main section-->
+  <!--wrapper-->
+  <div id='wrapper'></div>
     <div id='main'>
       <h1>Coding Quiz</h1>
       <p>Try to answer the following code-related questions within the time limit.<br>

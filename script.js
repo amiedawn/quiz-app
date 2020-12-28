@@ -118,7 +118,7 @@ function renderQuestions(currentQIndex) {
 function answerRW(event) {
   var answer = event.target;
   if (answer.matches("li")) {
-    var createDiv = document.createElement("div");
+    var createDiv = document.createElement("rw");
     createDiv.setAttribute("id", "createDiv");
     // answer is correct
     if (answer.textContent === arrQuestions[currentQIndex].rightChoice) {
@@ -152,11 +152,11 @@ function showSummary() {
   // display heading
   var createHeading = document.createElement("h1");
   createHeading.setAttribute("id", "createHeading");
-  createHeading.textContent = "All Done!"
+  createHeading.textContent = "All Done!";
   main.appendChild(createHeading);
 
   // display score
-  if (timeLeft >=0) {
+  if (timeLeft >= 0) {
     var finalTime = timeLeft;
     var createShowScore = document.createElement("p");
     clearInterval(showTimer);
@@ -166,10 +166,12 @@ function showSummary() {
 
   // request initials
   // display label
-  var createInitialsLabel = document.createElement("p");
+  var createInitialsLabel = document.createElement("label");
   createInitialsLabel.setAttribute("id", "createInitialsLabel");
   createInitialsLabel.textContent = "Enter Initials: ";
   main.appendChild(createInitialsLabel);
+
+
 
   // display input box
   var createInput = document.createElement("input");
@@ -178,24 +180,29 @@ function showSummary() {
   createInput.textContent = "";
   main.appendChild(createInput);
 
+ 
+
   // display submit button
   var createSubmit = document.createElement("button");
   createSubmit.setAttribute("type", "submit");
-  createSubmit.setAttribute("id", "Submit");
+  createSubmit.setAttribute("id", "submit");
   createSubmit.textContent = "Submit";
+  createSubmit.style.display = "block";
+  createSubmit.style.textAlign = "center";
   main.appendChild(createSubmit);
 
   // submit button event listener to store initials to local storage
-  createSubmit.addEventListener("click", function() {
+  createSubmit.addEventListener("click", function () {
     var initials = createInput.value;
     // validate if initials is left blank
     if (!initials) {
-      createInitialsLabel.textContent = "Invalid entry! Please enter your initials.";
+      createInitialsLabel.textContent =
+        "Invalid entry! Please enter your initials.";
     } else {
       var finalScore = {
         initials: initials,
-        score: finalTime
-      }
+        score: finalTime,
+      };
 
       // store score in local storage
       var scoresList = localStorage.getItem("scoresList");

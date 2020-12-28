@@ -1,0 +1,152 @@
+body { /* start page text and background */
+  font-family: sans-serif;
+  background-color: #f9fbfd;
+}
+
+.top-line {
+  padding: 50px 35px;
+  display: flex;
+  align-items: center; /* makes high scores and time on the same line */
+  font-size: 20px;
+  justify-content: space-between;
+}
+
+.top-line a { /* start page */
+  text-decoration: none;
+}
+
+.top-line p {
+ float: right;
+ margin-right: 20px;
+}  
+
+#start {
+  margin: 0 auto;
+  font-size: 20px;
+  background-color: purple;
+  color: white;
+}
+
+#main { /* start page center h1, p, and button */
+  text-align: center;  
+  padding: 20px 5px auto 0px;
+  padding-top: 70px;
+  color: hsl(206, 17%, 28%); 
+  font-size: 25px;
+}
+
+#countdownTimer {
+  float: right;
+}
+
+#scores { /* high scores page center h1, text box, and buttons */
+  text-align: center;  
+  padding: 20px 5px auto 5px;
+  padding-top: 70px;
+  color: hsl(206, 17%, 28%);
+  font-size: 20px;
+}
+
+button { /* put space between buttons */
+  padding: 15px;
+  margin: 0 auto;
+  font-size: 20px;
+  background-color: purple;
+  color: white;
+  
+}
+
+#submit {
+  background-color: purple;
+  margin-left: 33%;
+  padding: 15px 32px;
+  font-size: 20px;
+  color: white;
+  margin-left: 46%;
+}
+
+label {
+  margin-left: 180px;
+  font-size: 25px;
+  
+}
+
+input {
+  margin-bottom: 20px;
+  width: 10%;
+  height: 30px;
+  font-size: 25px;
+  border: 1px solid gray;
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+}
+
+ul { /* high scores list */
+  margin-top: 10px;
+  padding: 5px 15px;
+  font-size: 25px;
+}
+
+li { /* layout for questions and choices */
+  display: flex; /* keep this for sure */
+  margin-left: 35%;
+  margin-top: 10px;
+  background-color:cyan;
+  color: black;
+  padding: 10px;
+  width: 300px;
+  border-color: black;
+  border-style: solid;
+  font-size: 20px;
+}  
+
+li:hover { background-color: yellow} /* make button yellow background if hovering over it */
+
+rw { /* display right or wrong */
+  font-style: italic;
+  color: #ff4500;
+  text-align: center;  
+  padding-top: 0px;
+  font-size: 25px;
+} 
+
+#createDiv {
+  margin-top: 20px;
+  border-top: 1px solid lightgray;
+}
+
+/* Start media queries */
+@media screen and (max-width: 786px) {
+
+  body {
+    max-width: 786px;
+  }
+
+  a {
+    margin-left: 20%;
+  }
+
+  #tryAgain {    
+    position: relative;
+    left: 55%;
+  }
+
+  #clear {
+    position: relative;
+    right: 5%;
+  }
+}
+    
+@media screen and (max-width: 576px) {
+  
+  body {
+    min-width: 576px;
+  }
+
+  a {
+    margin-left: 10%;
+  }
+}
