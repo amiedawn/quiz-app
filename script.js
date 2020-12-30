@@ -4,7 +4,6 @@ var currentQIndex = 0;
 var countdownTimer = document.querySelector("#countdownTimer");
 var startTimer = document.querySelector("#start");
 var main = document.querySelector("#main");
-var wrapper = document.querySelector("#wrapper");
 
 // seconds left is 15 seconds/question
 var timeLeft = 60;
@@ -12,8 +11,6 @@ var timeLeft = 60;
 var showTimer = 0;
 // 10 second penalty per wrong question
 var penalty = 10;
-// new element
-var ulCreate = document.createElement("ul");
 
 // quiz questions array
 var arrQuestions = [
@@ -79,7 +76,7 @@ startTimer.addEventListener("click", function () {
   if (showTimer === 0) {
     showTimer = setInterval(function () {
       timeLeft = timeLeft - 1;
-      countdownTimer.textContent = "Time: " + timeLeft;
+      countdownTimer.textContent = "Time: " + timeLeft + " seconds left";
 
       if (timeLeft <= 0) {
         clearInterval(showTimer);
@@ -93,25 +90,28 @@ startTimer.addEventListener("click", function () {
 
 // render questions and answers
 function renderQuestions(currentQIndex) {
+  // new element
+  var ulCreate = document.createElement("ul");
+
   // initialize variables
   main.innerHTML = "";
   ulCreate.innerHTML = "";
 
   // render each question
-  for (var i=0; i < arrQuestions.length; i++) {
+  for (var i = 0; i < arrQuestions.length; i++) {
     var renQuestion = arrQuestions[currentQIndex].showQuestion;
     var renChoices = arrQuestions[currentQIndex].choices;
     main.textContent = renQuestion;
   }
-  
+
   // render choices for each question
   renChoices.forEach(function (newItem) {
     var listItem = document.createElement("li");
     listItem.textContent = newItem;
     main.appendChild(ulCreate);
     ulCreate.appendChild(listItem);
-    listItem.addEventListener("click", (answerRW));
-  })
+    listItem.addEventListener("click", answerRW);
+  });
 };
 
 // compare choice chosen to correct answer
@@ -171,16 +171,12 @@ function showSummary() {
   createInitialsLabel.textContent = "Enter Initials: ";
   main.appendChild(createInitialsLabel);
 
-
-
   // display input box
   var createInput = document.createElement("input");
   createInput.setAttribute("type", "text");
   createInput.setAttribute("id", "initials");
   createInput.textContent = "";
   main.appendChild(createInput);
-
- 
 
   // display submit button
   var createSubmit = document.createElement("button");
